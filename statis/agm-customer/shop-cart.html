@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Shopping Cart | American Giant Mattress</title>
+	<meta charset="utf-8" />
+	<meta data-react-helmet="true" http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="Author" content="" />
+	<link rel="icon" type="image/icon" href="assets/logo-agm/favicon.png">
+
+	<!-- mobile settings -->
+	<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+	<!-- WEB FONTS : use %7C instead of | (pipe) -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700"
+	 rel="stylesheet" type="text/css" />
+
+	<!-- CORE CSS -->
+	<link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+	<!-- THEME CSS -->
+	<link href="css/essentials.css" rel="stylesheet" type="text/css" />
+	<link href="css/layout.css" rel="stylesheet" type="text/css" />
+
+	<!-- PAGE LEVEL SCRIPTS -->
+	<link href="css/header-1.css" rel="stylesheet" type="text/css" />
+	<link href="css/layout-shop.css" rel="stylesheet" type="text/css" />
+	<link href="css/lightgrey.css" rel="stylesheet" type="text/css" id="color_scheme" />
+</head>
+
+<body class="smoothscroll enable-animation">
+
+	<!-- wrapper -->
+	<div id="wrapper">
+
+		<div id="header" class="navbar-toggleable-md sticky clearfix">
+
+			<!-- SEARCH HEADER -->
+			<div class="search-box over-header">
+				<a id="closeSearch" href="#" class="fa fa-remove"></a>
+
+				<form action="search-result.html" method="get">
+					<input type="text" class="form-control" placeholder="SEARCH" />
+				</form>
+			</div>
+			<!-- /SEARCH HEADER -->
+
+
+			<!-- TOP NAV -->
+			<header id="topNav">
+				<div class="container">
+
+					<!-- Mobile Menu Button -->
+					<button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+						<i class="fa fa-bars"></i>
+					</button>
+
+					<!-- BUTTONS -->
+					<ul class="float-right nav nav-pills nav-second-main">
+
+						<!-- SEARCH -->
+						<li class="search">
+							<a href="javascript:;">
+								<i class="fa fa-search"></i>
+							</a>
+						</li>
+						<!-- /SEARCH -->
+
+
+						<!-- QUICK SHOP CART -->
+						<li class="quick-cart">
+							<a href="#">
+								<span class="badge badge-aqua badge-corner">2</span>
+								<i class="fa fa-shopping-cart"></i>
+							</a>
+							<div class="quick-cart-box">
+								<h4>Shop Cart</h4>
+
+								<div class="quick-cart-wrapper">
+
+									<a href="#">
+										<!-- cart item -->
+										<img src="assets/content-images/slider-1-100x100.png" width="45" height="45" alt="product name" />
+										<h6><span>2x</span> KINGKOIL</h6>
+										<small>Rp. 2,000,000</small>
+									</a><!-- /cart item -->
+
+									<a href="#">
+										<!-- cart item -->
+										<img src="assets/content-images/slider-2-100x100.png" width="45" height="45" alt="product name" />
+										<h6><span>2x</span> STRESSLESS</h6>
+										<small>Rp. 2,000,000</small>
+									</a><!-- /cart item -->
+
+									<!-- cart no items example -->
+									<!--
+										<a class="text-center" href="#">
+											<h6>0 ITEMS ON YOUR CART</h6>
+										</a>
+										-->
+								</div>
+
+								<!-- quick cart footer -->
+								<div class="quick-cart-footer clearfix">
+									<a href="shop-cart.html" class="btn btn-primary btn-sm float-right">VIEW CART</a>
+									<span class="float-left"><strong>TOTAL:</strong> Rp. 4,000,000</span>
+								</div>
+								<!-- /quick cart footer -->
+
+							</div>
+						</li>
+						<!-- /QUICK SHOP CART -->
+
+					</ul>
+					<!-- /BUTTONS -->
+
+					<!-- Logo -->
+					<a class="logo float-left" href="index-home.html">
+						<img src="assets/logo-agm/logo.png" alt="" />
+					</a>
+
+				</div>
+
+				<div class="navbar-collapse collapse nav-main-collapse">
+					<nav class="nav-main text-center">
+						<ul id="topMain" class="nav nav-pills nav-main text-center">
+							<li>
+								<a href="shop.html">
+									PRODUCT
+								</a>
+							</li>
+							<li>
+								<a href="promotion-page.html">
+									PROMOTION
+								</a>
+							</li>
+							<li>
+								<a href="list-article.html">
+									AGMPEDIA
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									LOCATION
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									PARTNERSHIP
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</header>
+			<!-- /Top Nav -->
+
+		</div>
+
+		<section class="page-header page-header-md">
+			<div class="container">
+
+				<h1>SHOP CART</h1>
+
+				<!-- breadcrumbs -->
+				<ol class="breadcrumb">
+					<li><a href="index-home-before-login.html">Home</a></li>
+					<li><a href="shop.html">Product</a></li>
+					<li class="active">Cart</li>
+				</ol><!-- /breadcrumbs -->
+
+			</div>
+		</section>
+		<!-- /PAGE HEADER -->
+
+
+
+
+		<!-- CART -->
+		<section>
+			<div class="container">
+
+
+				<!-- EMPTY CART -->
+				<div class="card card-default">
+					<div class="card-block">
+						<strong>Shopping cart is empty!</strong><br />
+						You have no items in your shopping cart.<br />
+						Click <a href="shop-2col-left.html">here</a> to continue shopping. <br />
+						<span class="badge badge-warning">this is just an empty cart example</span>
+					</div>
+				</div>
+				<!-- /EMPTY CART -->
+
+
+
+				<!-- CART -->
+				<div class="row">
+
+					<!-- LEFT -->
+					<div class="col-lg-9 col-sm-8">
+
+						<!-- CART -->
+						<form class="cartContent clearfix" method="post" action="#">
+
+							<!-- cart content -->
+							<div id="cartContent">
+								<!-- cart header -->
+								<div class="item head clearfix">
+									<span class="cart_img"></span>
+									<span class="product_name fs-13 bold">PRODUCT NAME</span>
+									<span class="remove_item fs-13 bold"></span>
+									<span class="total_price fs-13 bold">TOTAL</span>
+									<span class="qty fs-13 bold">QUANTITY</span>
+								</div>
+								<!-- /cart header -->
+
+								<!-- cart item -->
+								<div class="item">
+									<div class="cart_img float-left fw-100 p-10 text-left"><img src="assets/content-images/slider-1-100x100.png"
+										 alt="product name" width="80" /></div>
+									<a href="shop-single-left.html" class="product_name">
+										<span>Product Name</span>
+										<small>Size: XL</small>
+									</a>
+									<a href="#" class="remove_item"><i class="fa fa-times"></i></a>
+									<div class="total_price">Rp. <span>2,000,000</span></div>
+									<div class="qty"><input type="number" value="1" name="qty" maxlength="3" max="999" min="1" /> &times; Rp.
+										2,000,000</div>
+									<div class="clearfix"></div>
+								</div>
+								<!-- /cart item -->
+
+								<!-- cart item -->
+								<div class="item">
+									<div class="cart_img float-left fw-100 p-10 text-left"><img src="assets/content-images/slider-2-100x100.png"
+										 alt="product name" width="80" /></div>
+									<a href="shop-single-left.html" class="product_name">
+										<span>Product Name</span>
+										<small>Size: 8.5</small>
+									</a>
+									<a href="#" class="remove_item"><i class="fa fa-times"></i></a>
+									<div class="total_price">Rp. <span>2,000,000</span></div>
+									<div class="qty"><input type="number" value="1" name="qty" maxlength="3" max="999" min="1" /> &times; Rp.
+										2,000,000</div>
+									<div class="clearfix"></div>
+								</div>
+								<!-- /cart item -->
+
+								<!-- cart item -->
+								<div class="item">
+									<div class="cart_img float-left fw-100 p-10 text-left"><img src="assets/content-images/slider-1-100x100.png"
+										 alt="product name" width="80" /></div>
+									<a href="shop-single-left.html" class="product_name">
+										<span>Product Name</span>
+										<small>Size: 6.5</small>
+									</a>
+									<a href="#" class="remove_item"><i class="fa fa-times"></i></a>
+									<div class="total_price">Rp. <span>2,000,000</span></div>
+									<div class="qty"><input type="number" value="1" name="qty" maxlength="3" max="999" min="1" /> &times; Rp.
+										2,000,000</div>
+									<div class="clearfix"></div>
+								</div>
+								<!-- /cart item -->
+
+
+								<!-- update cart -->
+								<button class="btn btn-oldblue mt-20 mr-10 float-right"><i class="glyphicon glyphicon-ok"></i> UPDATE CART</button>
+								<button class="btn btn-quitered mt-20 mr-10 float-right"><i class="fa fa-remove"></i> CLEAR CART</button>
+								<!-- /update cart -->
+
+								<div class="clearfix"></div>
+							</div>
+							<!-- /cart content -->
+
+						</form>
+						<!-- /CART -->
+
+					</div>
+
+
+					<!-- RIGHT -->
+					<div class="col-lg-3 col-sm-4">
+
+						<!-- TOGGLE -->
+						<div class="toggle-transparent toggle-bordered-full clearfix">
+
+							<div class="toggle mt-0">
+								<label>Voucher</label>
+
+								<div class="toggle-content">
+									<p class="mb-20">Enter your discount coupon code.</p>
+
+									<form action="#" method="post" class="m-0">
+										<input type="text" id="cart-code" name="cart-code" class="form-control text-center mb-10" placeholder="Voucher Code"
+										 required="required">
+										<button class="btn btn-oldblue btn-block" type="submit">SUBMIT</button>
+									</form>
+								</div>
+							</div>
+
+							<!-- <div class="toggle">
+								<label>Shipping tax calculator</label>
+
+								<div class="toggle-content">
+									<p class="pb-10">To get a shipping estimate, please enter your destination.</p>
+
+									<form action="#" method="post" class="m-0">
+										<label>Country*</label>
+										<select id="cart-tax-country" name="cart-tax-country" class="form-control pointer mb-20">
+											<option value="1">United States</option>
+											<option value="2">United Kingdom</option>
+											<option value="2">...........</option>
+											add all here
+										</select>
+
+										<label>State/Province</label>
+										<select id="cart-tax-state" name="cart-tax-state" class="form-control pointer mb-20">
+											<option value="1">Alabama</option>
+											<option value="2">Alaska</option>
+											<option value="2">...........</option>
+											add all here
+										</select>
+
+										<label>Zip/Postal Code</label>
+										<input type="text" id="cart-tax-postal" name="cart-tax-postal" class="form-control mb-20">
+
+										<button class="btn btn-oldblue btn-block" type="submit">SUBMIT</button>
+									</form>
+								</div>
+							</div> -->
+
+						</div>
+						<!-- /TOGGLE -->
+
+						<div class="toggle-transparent toggle-bordered-full clearfix">
+							<div class="toggle active">
+								<div class="toggle-content">
+
+									<span class="clearfix">
+										<span class="float-right">Rp. 6,000,000</span>
+										<strong class="float-left">Subtotal:</strong>
+									</span>
+									<span class="clearfix">
+										<span class="float-right">Rp. 0</span>
+										<span class="float-left">Discount:</span>
+									</span>
+									<span class="clearfix">
+										<span class="float-right">Rp. 0</span>
+										<span class="float-left">Shipping:</span>
+									</span>
+
+									<hr />
+
+									<span class="clearfix">
+										<span class="float-right fs-20">Rp. 6,000,000</span>
+										<strong class="float-left">TOTAL:</strong>
+									</span>
+
+									<hr />
+
+									<a href="shop-checkout.html" class="btn btn-oldblue btn-lg btn-block"><i class="fa fa-mail-forward"></i>
+										Check Out</a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+				<!-- /CART -->
+
+			</div>
+		</section>
+		<!-- /CART -->
+
+		<!-- FOOTER -->
+		<footer id="footer">
+			<div class="container footer-zero">
+				<div class="row mb-40 fs-13 footer-zero">
+					<!-- col #1 -->
+					<div class="col-12 col-md-7 footer-zero">
+						<h2 class="pt-10">
+							Stay in the know
+						</h2>
+						<h6>Be the first to hear about new inventory and offers.</h6>
+						<div class="input-email mb-3">
+							<input type="text" class="form-control form-control-footer" placeholder="Your Mail" aria-label="Your Mail"
+							 aria-describedby="basic-addon2">
+							<div class="input-group-append">
+								<button class="email-button eyebrow">SUBMIT<i class="pl-5 fa fa-chevron-right"></i></button>
+							</div>
+						</div>
+
+						<!-- Social Icons -->
+						<div class="pt-15">
+							<div class="clearfix">
+								<a href="!#" class="social-icon social-icon-round social-icon-dark social-facebook float-left" data-toggle="tooltip"
+								 data-placement="top" title="Facebook">
+									<i class="icon-facebook"></i>
+									<i class="icon-facebook"></i>
+								</a>
+								<a href="!#" class="social-icon social-icon-round social-icon-dark social-twitter float-left" data-toggle="tooltip"
+								 data-placement="top" title="Twitter">
+									<i class="icon-twitter"></i>
+									<i class="icon-twitter"></i>
+								</a>
+								<a href="!#" class="social-icon social-icon-round social-icon-dark social-instagram float-left" data-toggle="tooltip"
+								 data-placement="top" title="Instagram">
+									<i class="icon-instagram2"></i>
+									<i class="icon-instagram2"></i>
+								</a>
+								<a href="!#" class="social-icon social-icon-round social-icon-dark social-whatsapp float-left" data-toggle="tooltip"
+								 data-placement="top" title="Whatsapp">
+									<i class="icon-call"></i>
+									<i class="icon-call"></i>
+								</a>
+							</div>
+						</div>
+						<!-- /Social Icons -->
+					</div>
+					<!-- /col #1 -->
+
+					<!-- col #2 -->
+					<div class="col-sm-12 col-md-5 pt-10 footer-zero">
+						<div class="row">
+							<div class="col-md-4 col-4 pt-5">
+								<h4 class="letter-spacing-1 footer-zero">SHOP</h4>
+								<ul class="list-unstyled footer-list half-paddings b-0">
+									<li><a class="block" href="shop.html">All Furniture</a></li>
+									<li><a class="block" href="shop.html">Packages</a></li>
+									<li><a class="block" href="shop.html">Living Room</a></li>
+									<li><a class="block" href="shop.html">Dinning Room</a></li>
+									<li><a class="block" href="shop.html">Bedroom</a></li>
+									<li><a class="block" href="shop.html">Home Office</a></li>
+								</ul>
+							</div>
+							<div class="col-md-4 col-4 pt-5">
+								<h4 class="letter-spacing-1 footer-zero">ABOUT</h4>
+								<ul class="list-unstyled footer-list half-paddings b-0">
+									<li><a class="block" href="page-about.html">About Us</a></li>
+									<li><a class="block" href="page-contact.html">Contact Us</a></li>
+									<li><a class="block" href="page-faq.html">FAQ</a></li>
+								</ul>
+							</div>
+							<div class="col-md-4 col-4 pt-5">
+								<h4 class="letter-spacing-1 footer-zero">HELP</h4>
+								<ul class="list-unstyled footer-list half-paddings b-0">
+									<li><a class="block" href="term-condition.html">Terms & Conditions</a></li>
+									<li><a class="block" href="privacy-policy.html">Privacy Policy</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /col #2 -->
+				</div>
+			</div>
+			<div class="copyright">
+				<div class="container text-center">
+					&copy; All Rights Reserved, Hayabusa
+				</div>
+			</div>
+		</footer>
+		<!-- /FOOTER -- -->
+
+	</div>
+	<!-- /wrapper -->
+
+
+	<!-- SCROLL TO TOP -->
+	<a href="#" id="toTop"></a>
+
+
+	<!-- PRELOADER -->
+	<div id="preloader">
+		<div class="inner">
+			<span class="loader"></span>
+		</div>
+	</div><!-- /PRELOADER -->
+
+
+	<!-- JAVASCRIPT FILES -->
+	<script>
+		var plugin_path = 'plugins/';
+	</script>
+	<script src="plugins/jquery/jquery-3.3.1.min.js"></script>
+
+	<script src="javascript/scripts.js"></script>
+
+	<!-- STYLESWITCHER - REMOVE -->
+	<!-- <script async type="text/javascript" src="demo_files/styleswitcher/styleswitcher.js"></script> -->
+
+	<!-- PAGE LEVEL SCRIPTS -->
+	<script src="javascript/demo.shop.js"></script>
+</body>
+
+</html>

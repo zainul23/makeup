@@ -1,0 +1,36 @@
+.btn-oldblue {
+	background-color: #33518F;
+	color: #fff;
+	border-radius: 3px !important;
+}
+
+.btn-oldblue-secondary {
+	background-color: #fff;
+	color: #33518F;
+	border-color: #33518F;
+	border-radius: 3px !important;
+}
+
+.btn-little-round {
+	border-radius: 3px !important;
+}
+
+.btn-danger-secondary {
+	color: #dc3545;
+	background-color: #fff;
+	border-color: #dc3545;
+}
+
+.btn-danger-secondary:hover {
+	color: #fff;
+	background-color: #c82333;
+	border-color: #bd2130;
+}
+
+body.modal-open .background-container{
+	-webkit-filter: blur(10px);
+	-moz-filter: blur(10px);
+	-o-filter: blur(10px);
+	-ms-filter: blur(10px);
+	filter: blur(10px);
+}
