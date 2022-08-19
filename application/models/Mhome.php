@@ -439,27 +439,32 @@ class Mhome extends CI_Model{
     }
 
   public function getOrderList($id) {
-      $this->db->select('a.order_id, a.order_number, a.type, a.price, a.order_date, a.status');
-      $this->db->from('tm_order a');
-      $this->db->join('tm_catalogs b', 'b.id = a.cat_id');
-      $this->db->where('a.user_id', $id);
-      $this->db->where('a.status != 3');
-      $this->db->group_by('a.order_id');
-      $this->db->order_by('order_date', 'DESC');
-      $result = $this->db->get();
-      return $result->result_array();
+      // $this->db->select('a.order_id, a.order_number, a.type, a.price, a.order_date, a.status');
+      // $this->db->from('tm_order a');
+      // $this->db->join('tm_catalogs b', 'b.id = a.cat_id');
+      // $this->db->where('a.user_id', $id);
+      // $this->db->where('a.status = 1');
+      // $this->db->group_by('a.order_id');
+      // $this->db->order_by('order_date', 'DESC');
+    $query = $this->db->query("
+			SELECT a.order_id, a.order_number, a.type, a.price, a.order_date, a.status 
+      FROM tm_order a
+				WHERE status IN ('0','1','2')
+			  GROUP BY a.order_id
+        ORDER BY a.order_date DESC
+		");
+		return $query->result_array();
   }
 
     public function getOrderHistory($id) {
-        $this->db->select('a.id, a.order_number, a.total, a.order_date, a.status_order, sum(b.quantity) as item_number');
-        $this->db->from('tm_order a');
-        $this->db->join('tr_order_detail b', 'b.id_tm_order = a.id');
-        $this->db->where('a.id_userlogin', $id);
-        $this->db->where('(a.status_order = 1 OR a.status_order = 3)');
-        $this->db->group_by('a.id');
-        $this->db->order_by('order_date', 'DESC');
-        $result = $this->db->get();
-        return $result->result_array();
+      $query = $this->db->query("
+        SELECT a.order_id, a.order_number, a.type, a.price, a.order_date, a.status 
+        FROM tm_order a
+          WHERE status NOT IN ('0','1','2')
+          GROUP BY a.order_id
+          ORDER BY a.order_date DESC
+		  ");
+		  return $query->result_array();
     }
 
   public function detail_district_cart($idDistrict){
@@ -476,47 +481,42 @@ class Mhome extends CI_Model{
     }
   }
 
-  public function getShop_product($brand = NULL, $category = NULL){
-    $this->db->select('a.id, a.name, a.slugs, a.image, a.stars, a.position, c.image_1');
-    $this->db->from('tm_product a');
-    $this->db->join('tr_product_image c', 'c.id_prod = a.id', 'left');
-    $this->db->join('tr_product_size d', 'd.prod_id = a.id', 'left');
+  public function get_catalogs()
+  {
+    $this->db->select('a.id, a.name, a.price, a.slugs');
+    $this->db->from('tm_catalogs a');
+    // $this->db->join('tm_order b', 'b.cat_id = a.id', 'left');
     $this->db->where('a.deleted', 0);
-    $this->db->where('a.active', 1);
-    if ($brand != NULL) {
-      $this->db->where('a.brand_id', $brand);
+    $query = $this->db->get();
+    if ($query->num_rows() != 0) {
+      return $query->result_array();
+    } else {
+      return FALSE;
     }
+  }
+
+  public function count_stock($slugs = NULL)
+  {
+    $this->db->select('a.id, a.name, a.price, a.slugs, a.quota');
+    $this->db->from('tm_catalogs a');
+    // $this->db->join('tm_order b', 'b.cat_id = a.id', 'left');
+    $this->db->where('a.deleted', 0);
+    $query = $this->db->get();
+    if ($query->num_rows() != 0) {
+      return $query->result_array();
+    } else {
+      return FALSE;
+    }
+  }
+
+  public function get_data_catalogs($category = NULL)
+  {
+    $this->db->select('a.id, a.title, a.price, a.type, a.picture');
+    $this->db->from('catalog_data a');
+    // $this->db->join('tm_order b', 'b.cat_id = a.id', 'left');
+    $this->db->where('a.status = "0"');
     if ($category != NULL) {
-      $this->db->where('a.cat_id', $category);
-    }
-    $this->db->select_min('d.price');
-    $this->db->select_min('d.sub_price');
-    $this->db->order_by('a.position', 'asc');
-    $this->db->group_by('a.id');
-    $query = $this->db->get();
-    if ($query->num_rows() != 0) {
-      return $query->result_array();
-    } else {
-      return FALSE;
-    }
-  }
-
-  public function bed_linenProducts($brand = NULL){
-    $this->db->select('a.id, b.name as brand, c.name as category, a.name, a.slugs, a.image, a.stars, d.position, e.image_1');
-    $this->db->select_min('f.price');
-    $this->db->from('tm_product a');
-    $this->db->join('tm_brands b', 'b.id = a.brand_id', 'left');
-    $this->db->join('tm_category c', 'c.id = a.cat_id', 'left');
-    $this->db->join('tr_product_bed_linen d', 'd.prod_id = a.id', 'left');
-    $this->db->join('tr_product_image e', 'e.id_prod = a.id', 'left');
-    $this->db->join('tr_product_size f', 'f.prod_id = a.id', 'left');
-    $this->db->order_by('d.position', 'asc');
-    $this->db->group_by('a.id');
-    if ($brand == NULL) {
-      $this->db->where('a.cat_id', 2);
-    }else{
-      $where = array('a.brand_id' => $brand, 'a.cat_id' => 2);
-      $this->db->where($where);
+      $this->db->where('a.type', $category);
     }
     $query = $this->db->get();
     if ($query->num_rows() != 0) {
@@ -526,6 +526,27 @@ class Mhome extends CI_Model{
     }
   }
 
+  public function getShop_product($category = NULL){
+    $this->db->select('a.id, a.name, b.picture, a.price, a.slugs');
+    $this->db->from('tm_catalogs a');
+    $this->db->join('tm_order b', 'b.cat_id = a.id', 'left');
+    $this->db->where('a.deleted', 0);
+    $this->db->where('b.status = "2"');
+    // if ($brand != NULL) {
+    //   $this->db->where('a.brand_id', $brand);
+    // }
+    if ($category != NULL) {
+      $this->db->where('a.slugs', $category);
+    }
+    // $this->db->order_by('a.position', 'asc');
+    $this->db->group_by('a.id');
+    $query = $this->db->get();
+    if ($query->num_rows() != 0) {
+      return $query->result_array();
+    } else {
+      return FALSE;
+    }
+  }
     public function get_list_bed_linen(){
         $this->db->select('a.id, b.name, b.slugs, b.stars, c.sub_price, d.image_1, e.name as brand');
         $this->db->select_min('c.price');

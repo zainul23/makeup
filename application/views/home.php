@@ -95,3 +95,89 @@
     </div>
 </section>
 <!-- /PRODUCT -->
+<section id="review" class="section-lg pt-120 pb-60">
+    <div class="row">
+        <div class="container">
+            <div class="col-12 pb-40">
+                <h3 class="text-center">Review This Site</h3>
+            </div>
+            <?php if ($this->session->has_userdata('error')): ?>
+                <div class="text-center">
+                    <div class="container">
+                        <div class="alert alert-danger text-center" role="alert">
+                            <?= $this->session->userdata('error');?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($this->session->has_userdata('success')): ?>
+                <div class="text-center">
+                    <div class="container">
+                        <div class="alert alert-success text-center" role="alert">
+                            <?= $this->session->userdata('success');?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <div class="col-md-12">
+                <!-- REVIEW FORM -->
+                <form method="post" action="<?= site_url('home/review/')?>" id="form-review">
+
+                    <div class="row mb-10">
+
+                        <div class="col-md-6 mb-10">
+                            <!-- Name -->
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Name *" maxlength="100" required="">
+                        </div>
+
+                        <div class="col-md-6">
+                            <!-- Email -->
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Email *" maxlength="100"
+                                required="">
+                        </div>
+
+                    </div>
+
+                    <!-- Comment -->
+                    <div class="mb-30">
+                        <textarea name="comment" id="comment" class="form-control" rows="6" placeholder="Comment" maxlength="1000"></textarea>
+                    </div>
+
+                    <!-- Stars -->
+                    <div class="product-star-vote clearfix">
+
+                        <label class="radio float-left">
+                            <input type="radio" name="product-review-vote" value="1" />
+                            <i></i> 1 Star
+                        </label>
+
+                        <label class="radio float-left">
+                            <input type="radio" name="product-review-vote" value="2" />
+                            <i></i> 2 Stars
+                        </label>
+
+                        <label class="radio float-left">
+                            <input type="radio" name="product-review-vote" value="3" />
+                            <i></i> 3 Stars
+                        </label>
+
+                        <label class="radio float-left">
+                            <input type="radio" name="product-review-vote" value="4" />
+                            <i></i> 4 Stars
+                        </label>
+
+                        <label class="radio float-left">
+                            <input type="radio" name="product-review-vote" value="5" />
+                            <i></i> 5 Stars
+                        </label>
+
+                    </div>
+                    <!-- Send Button -->
+                    <button type="submit" class="btn btn-oldblue"><i class="fa fa-check"></i> Send Review</button>
+                </form>
+                <!-- /REVIEW FORM -->
+            </div>
+        </div>
+    </div>
+</section>

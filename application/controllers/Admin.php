@@ -12,6 +12,11 @@ class Admin extends CI_Controller {
         $this->load->model('Madmin', 'madmin');
     }
 
+    public function index()
+    {
+        echo 'cok';
+    }
+
     public function list_type(){
         if ($this->session->userdata('uType') == 1) {
             $data['sizes'] = $this->madmin->getProducts(array('deleted' => 0), NULL,'tm_size', FALSE);
@@ -160,6 +165,22 @@ class Admin extends CI_Controller {
         }
     }
 
+    public function list_data_catalog(){
+        if ($this->session->userdata('uType') == 1) {
+            $data['catalogs'] = $this->madmin->getProducts(array('id !=' => 0), NULL, 'catalog_data', FALSE);
+
+            $this->load->view('include/admin/header');
+            $this->load->view('include/admin/left-sidebar');
+            $this->load->view('admin/list-data-catalog', $data);
+            $this->load->view('include/admin/footer');
+
+        }else{
+            $this->load->view('include/header2');
+            $this->load->view('un-authorise');
+            $this->load->view('include/footer');
+        }
+    }
+
 
     public function info_catalog($slugs_catalog){
       if ($this->session->userdata('uType') == 1) {
@@ -227,6 +248,54 @@ class Admin extends CI_Controller {
         }
     }
 
+    public function data_catalog(){
+        if ($this->session->userdata('uType') == 1) {
+            $this->load->helper('form');
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('items', 'Name', 'required');
+
+            if ($this->form_validation->run() == TRUE) {
+                $file_name = strtolower('catalog-logo-'.rand(10,100));
+
+                $config['upload_path'] = './asset/brands/';
+                $config['allowed_types'] = 'jpg|jpeg|png|svg';
+                $config['file_name']  = $file_name;
+
+                $this->load->library('upload', $config);
+                if (! $this->upload->do_upload('catalog-pics')) {
+                    $this->session->set_flashdata('error', $this->upload->display_errors());
+
+                    $this->load->view('include/admin/header');
+                    $this->load->view('include/admin/left-sidebar');
+                    $this->load->view('admin/data-catalog');
+                    $this->load->view('include/admin/footer');
+                }else{
+                    $pName = $this->upload->data();
+                    $slugs = str_replace(' ', '-', strtolower($this->input->post('items')));
+                    $items = array(
+                        'title'          => $this->input->post('items'),
+                        'price'         => $this->input->post('price'),
+                        'cat_id'         => $this->input->post('cat_id'),
+                        'type'         => $this->input->post('category'),
+                        'picture'          => $pName['orig_name'],
+                    );
+                    $this->madmin->inputData('catalog_data', $items);
+                    redirect('admin/list_data_catalog');
+                }
+            }else{
+                $this->load->view('include/admin/header');
+                $this->load->view('include/admin/left-sidebar');
+                $this->load->view('admin/data-catalog');
+                $this->load->view('include/admin/footer');
+            }
+        }else{
+            $this->load->view('include/header2');
+            $this->load->view('un-authorise');
+            $this->load->view('include/footer');
+        }
+    }
+
     public function checkingCatalog($catalog){
         $has_catalog = $this->madmin->getProducts(array('name' => $catalog),
             array('nameField' => 'name'), 'tm_catalogs', TRUE);
@@ -262,6 +331,17 @@ class Admin extends CI_Controller {
         if ($this->session->userdata('uType') == 1) {
             $this->madmin->updateData(array('slugs' => $catalogSlugs), 'tm_catalogs', array('deleted' => 1));
             redirect('admin/list_catalog', 'refresh');
+        }else{
+            $this->load->view('include/header2');
+            $this->load->view('un-authorise');
+            $this->load->view('include/footer');
+        }
+    }
+
+    public function delete_data_catalog($id){
+        if ($this->session->userdata('uType') == 1) {
+            $this->madmin->deleteData(array('id' => $id), 'catalog_data');
+            redirect('admin/list_data_catalog', 'refresh');
         }else{
             $this->load->view('include/header2');
             $this->load->view('un-authorise');
@@ -516,6 +596,69 @@ class Admin extends CI_Controller {
                 $this->madmin->deleteData(array('id' => $idSlider), 'tm_cover');
             }
             redirect('admin/sa_slider');
+        }else{
+            $this->load->view('include/header2');
+            $this->load->view('un-authorise');
+            $this->load->view('include/footer');
+        }
+    }
+
+    public function list_transaction(){
+        if ($this->session->userdata('uType') == 1) {
+            $data['transactions'] = $this->madmin->getProducts(array('status !=' => '3', 'status !=' => '2'), NULL, 'tm_order', FALSE);
+
+            $this->load->view('include/admin/header');
+            $this->load->view('include/admin/left-sidebar');
+            $this->load->view('admin/list-transaction', $data);
+            $this->load->view('include/admin/footer');
+
+        }else{
+            $this->load->view('include/header2');
+            $this->load->view('un-authorise');
+            $this->load->view('include/footer');
+        }
+    }
+
+    public function list_history_transaction(){
+        if ($this->session->userdata('uType') == 1) {
+            $data['transactions'] = $this->madmin->getProducts(array('status !=' => '0', 'status !=' => '1'), NULL, 'tm_order', FALSE);
+
+            $this->load->view('include/admin/header');
+            $this->load->view('include/admin/left-sidebar');
+            $this->load->view('admin/list-history-transaction', $data);
+            $this->load->view('include/admin/footer');
+
+        }else{
+            $this->load->view('include/header2');
+            $this->load->view('un-authorise');
+            $this->load->view('include/footer');
+        }
+    }
+
+    public function delete_order($order_id){
+        if ($this->session->userdata('uType') == 1) {
+            $this->madmin->deleteData(array('order_id' => $order_id), 'tm_order');
+            redirect('admin/list_transaction', 'refresh');
+        }else{
+            $this->load->view('include/header2');
+            $this->load->view('un-authorise');
+            $this->load->view('include/footer');
+        }
+    }
+
+    public function finish_order($order_id){
+        if($this->session->userdata('uType') == 1){
+            $stat = $this->madmin->getProducts(array('order_id' => $order_id), array('statField' => 'status'), 'tm_order',TRUE);
+            // if($stat['status'] === 1){
+            $items = array('status' => '2');
+            $this->madmin->updateData(array('order_id' => $order_id), 'tm_order', $items);
+            redirect('admin/list_transaction', 'refresh');
+            // }
+            // else{
+            //     $items = array('status' => 1);
+            //     $this->madmin->updateData(array('slugs' => $order_id), 'tm_order', $items);
+            //     redirect('admin/list_catalog', 'refresh');
+            // }
         }else{
             $this->load->view('include/header2');
             $this->load->view('un-authorise');

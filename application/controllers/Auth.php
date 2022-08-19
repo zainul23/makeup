@@ -14,8 +14,8 @@ class Auth extends CI_Controller{
 
     // if we are already get session to login
     if ($this->session->userdata('isLogin') === TRUE) {
-      redirect();
-
+      redirect('admin');
+      
     // this is block for condition that we aren't get session to login
     } else {
       $this->load->helper('form');
@@ -51,10 +51,11 @@ class Auth extends CI_Controller{
         );
         $this->session->set_userdata($data);
         $hasCart = $this->cart->contents();
+        echo 'dsadssasds';
         if ($hasCart != NULL && $this->session->userdata('uType') == 4) {
           redirect('home/shopCart');
         } else {
-          redirect();
+          redirect('admin');
         }
       }
     }

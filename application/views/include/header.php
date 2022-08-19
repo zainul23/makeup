@@ -110,22 +110,21 @@
                         <ul id="topMain" class="nav nav-pills nav-main text-center">
                             <li>
                                 <!-- HOME -->
-                                <a href="#">
+                                <a href="<?= base_url('')?>">
                                     HOME
                                 </a>
                             </li>
                             <li>
                                 <!-- HOME -->
-                                <a href="#">
+                                <a href="<?= base_url('home/catalog')?>">
                                     CATALOG
                                 </a>
                             </li>
-                            <li>
-                                <!-- HOME -->
+                            <!-- <li>
                                 <a href="#">
                                     LOCATION
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </nav>
                 </div>

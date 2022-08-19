@@ -3,10 +3,22 @@
     <section class="content">
         <div class="container">
             <div class="row">
-
+                <div class="col-md-12 col-sm-12 mb-30">
+                    <header class="mb-20">
+                        <h3>Exixsting Quota</h3>
+                    </header>
+                    <div class="m-0 sky-form boxed">
+                        <div class="row">
+                            <?php $no=1; ?>
+                            <?php foreach ($quotas as $quota): ?>
+                                <div class="col-md-3"><span class="text-center"><?= $no;?>) <strong><?= $quota['name']?></strong> : <strong><?= $quota['quota']?></strong></span></div>
+                                <?php $no++ ?>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
                 <!-- LOGIN -->
                 <div class="col-md-12 col-sm-12">
-
                     <!-- ALERT -->
                     <?php if($this->session->has_userdata('error')): ?>
                     <div class="alert alert-mini alert-danger mb-30">

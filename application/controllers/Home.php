@@ -18,9 +18,22 @@ class Home extends CI_Controller{
       if ($this->session->userdata('uNew') == 1) {
         redirect('auth/completing_profile');
       }else{
+          $all = $this->mhome->getProducts(null, null, 'tm_order', FALSE);  
+          $pending = $this->mhome->getProducts(array('status' => '0'), null, 'tm_order', FALSE);  
+          $process = $this->mhome->getProducts(array('status' => '1'), null, 'tm_order', FALSE);  
+          $finish = $this->mhome->getProducts(array('status' => '2'), null, 'tm_order', FALSE); 
+          $cancel = $this->mhome->getProducts(array('status' => '3'), null, 'tm_order', FALSE); 
+
+          $data['all'] = count($all);
+          $data['pending'] = count($pending);
+          $data['process'] = count($process);
+          $data['finish'] = count($finish);
+          $data['cancel'] = count($cancel);
+          // var_dump(count($data['all']));
+          // exit;
           $this->load->view('include/admin/header');
           $this->load->view('include/admin/left-sidebar');
-          $this->load->view('admin/home');
+          $this->load->view('admin/home', $data);
           $this->load->view('include/admin/footer');
       }
     } elseif ($this->session->userdata('uType') == 4) {
@@ -82,9 +95,9 @@ class Home extends CI_Controller{
 
 //      print_r($data);
 
-          $brands['brands'] = $this->mhome->getProducts(array('id !=' => 0, 'deleted' => 0, 'status' => 1), NULL, 'tm_brands', FALSE);
+          // $brands['brands'] = $this->mhome->getProducts(array('id !=' => 0, 'deleted' => 0, 'status' => 1), NULL, 'tm_brands', FALSE);
 
-          $this->load->view('include/header2', $brands);
+          $this->load->view('include/header2');
           $this->load->view('history-page', $data);
           $this->load->view('include/footer');
       } else {
@@ -111,34 +124,16 @@ class Home extends CI_Controller{
 
   public function detail_transaction($orderNum){
     if ($this->session->userdata('uType') == 4) {
-      // $idCustomer = $this->session->userdata('uId');
-      // $ordr = $this->mhome->getProducts(array('order_number' => $orderNum), array('idF' => 'order_id'), 'tm_order', TRUE);
-      // $idOrder = $ordr['order_id'];
-      // $data['detailOrder'] = $this->mhome->detailOrder($idOrder, $idCustomer);
-
-      // $this->load->view('include/header2');
-      // $this->load->view('detail-transaction-page', $data);
-      // $this->load->view('include/footer');
 
       $this->load->helper('form');
-      $this->load->library('form_validation');
+      $idCustomer = $this->session->userdata('uId');
+      $ordr = $this->mhome->getProducts(array('order_number' => $orderNum), array('idF' => 'order_id'), 'tm_order', TRUE);
+      $idOrder = $ordr['order_id'];
+      $data['detailOrder'] = $this->mhome->detailOrder($idOrder, $idCustomer);
 
-      // $this->form_validation->set_rules('items', 'Catalog', 'required');
-      // $this->form_validation->set_rules('description', 'Description', 'required');
-
-      if ($this->form_validation->run() === FALSE) {
-        $idCustomer = $this->session->userdata('uId');
-        $ordr = $this->mhome->getProducts(array('order_number' => $orderNum), array('idF' => 'order_id'), 'tm_order', TRUE);
-        $idOrder = $ordr['order_id'];
-        $data['detailOrder'] = $this->mhome->detailOrder($idOrder, $idCustomer);
-        
-        $this->load->view('include/header2');
-        $this->load->view('detail-transaction-page', $data);
-        $this->load->view('include/footer');
-      } else {
-        // if ($_FILES['catalog-pics']['size'] != 0) {
-        
-      }
+      $this->load->view('include/header2');
+      $this->load->view('detail-transaction-page', $data);
+      $this->load->view('include/footer');
     } else {
       redirect('auth/login');
     }
@@ -262,6 +257,7 @@ class Home extends CI_Controller{
   }
 
   public function page_order(){
+    $data['quotas'] = $this->mhome->count_stock();
     $this->load->helper('form');
     $this->load->library('form_validation');
     if ($this->session->userdata('uType') == 4) {
@@ -271,6 +267,7 @@ class Home extends CI_Controller{
       $this->form_validation->set_rules('type', 'Type', 'required');
 
       if ($this->form_validation->run() === FALSE) {
+        $data['quotas'] = $this->mhome->count_stock();
         // $data['provinces'] = $this->mauth->getProducts(NULL, NULL, 'provinsi', FALSE);
         $data['catalogs'] = $this->mhome->getProducts(array('deleted' => 0, 'status' => 1), NULL,'tm_catalogs', FALSE);
         
@@ -287,11 +284,15 @@ class Home extends CI_Controller{
             'user_id'     => $id_userlogin,
             'cat_id'      => $this->input->post('type'),
             'type'        => $this->input->post('category'),
-            'status'      => 0,
             'note'        => $this->input->post('note')
         );
         $this->mhome->inputData('tm_order', $items);
-        $this->session->set_flashdata('successmsg', 'Your account was successfully created');
+        $cat = $this->mhome->getProducts(array('deleted' => 0, 'status' => 1, 'id' => $this->input->post('type')), NULL,'tm_catalogs', FALSE);
+        $items1 = array(
+          'quota'  => $cat[0]['quota'] - 1,
+        );
+        $this->mhome->updateData(array('id' => $cat[0]['id']), $items1, 'tm_catalogs');
+        // $this->session->set_flashdata('successmsg', 'Your account was successfully created');
         redirect('home/transactionPage');
       }
     } else {
@@ -301,9 +302,8 @@ class Home extends CI_Controller{
 
   public function upload_payment()
   {
-    $this->load->helper('form');
-    $this->load->library('form_validation');
     if ($this->session->userdata('uType') == 4) {
+      $this->load->helper('form');
       $config['upload_path'] = './asset/upload/';
       $config['max_size'] = 2000;
       $config['allowed_types'] = 'jpg|jpeg|png';
@@ -311,33 +311,43 @@ class Home extends CI_Controller{
       $this->load->library('upload', $config);
 
       if (!$this->upload->do_upload('file')) {
-          $this->_handle_upload_slide_error('destkop');
-      }else{
-          $pName = $this->upload->data();
-          $items = array(
-              'slide' => $pName['file_name']
-          );
-          dump($items);
-          exit;
-          // $this->mhome->updateData('tm_order', $items);
-          // redirect('admin/sa_slider');
-          // upload slide for modile version
-          // $config['max_width'] = 400;
-          // $config['max_height'] = 600;
-          // $this->upload->initialize($config);
-          // if (!$this->upload->do_upload('sliderPict-mobile')) {
-          //     // delete previously uploaded desktop image
-          //     $file_path = 'asset/upload/'.$pName['file_name'];
-          //     if (file_exists($file_path)) {
-          //         unlink($file_path);
-          //     }
-          //     $this->_handle_upload_slide_error('mobile');
-          // } else {
-              // $pNameMobile = $this->upload->data();
-              // $coverIdentifier = 1;
-              
-          // }
+        $idCustomer = $this->session->userdata('uId');
+        $post = $this->input->post('id');
+        $ordr = $this->mhome->getProducts(array('order_number' => $post), array('idF' => 'order_id'), 'tm_order', TRUE);
+        $idOrder = $ordr['order_id'];
+        $version = 'Upload';
+        $data['detailOrder'] = $this->mhome->detailOrder($idOrder, $idCustomer);
+        $data['error'] = '<p><strong>' . ucfirst($version) . ' version:</strong></p>'
+        . $this->upload->display_errors('', '');
+        $this->load->view('include/header2');
+        $this->load->view('detail-transaction-page', $data);
+        $this->load->view('include/footer');
+      } else {
+        $pName = $this->upload->data();
+        // $file_path = 'asset/upload/'.$pName['file_name'];
+        // if (file_exists($file_path)) {
+        //     unlink($file_path);
+        // }
+        $order_id = $this->input->post('order_id');
+        $items = array(
+          'picture' => $pName['file_name'],
+          'status' => '1'
+        );
+
+        // $this->mhome->updateData(array('order_id' => $order_id), 'tm_order', $items);
+        $this->mhome->updateData(array('order_id' => $order_id), $items, 'tm_order');
+        // var_dump($items);
+        // exit;
+        redirect('home/transactionPage', 'refresh');
+        // var_dump($items);
+        // exit;
       }
+      
+      // if (!$this->upload->do_upload('file')) {
+      //     $this->_handle_upload_slide_error('destkop');
+      // }else{
+         
+      // }
     } else {
 
     }
@@ -361,5 +371,53 @@ class Home extends CI_Controller{
     }
     $this->output->set_content_type('application/json')
                 ->set_output(json_encode($data));
+  }
+
+  public function catalog($category = NULL){
+    if ($category === NULL) {
+      $data['products'] = $this->mhome->get_data_catalogs();
+      $data['catalogs'] = $this->mhome->get_catalogs();
+      $data['brand'] = array('name' => 'All Products');
+      $data['reviews'] = $this->mhome->getProducts(array('status' => 1), NULL,'tm_reviews', FALSE);
+      $data['category'] = array();
+    } else {
+      $data['products'] = $this->mhome->get_data_catalogs($category);
+      $data['catalogs'] = $this->mhome->get_catalogs();
+      $data['brand'] = array('name' => 'All Products');
+      $data['reviews'] = $this->mhome->getProducts(array('status' => 1), NULL,'tm_reviews', FALSE);
+      $data['category'] = array();
+    }
+    $this->load->view('include/header2');
+    $this->load->view('shop', $data);
+    $this->load->view('include/footer');
+  }
+
+  public function review()
+  {
+    // $slugs = $this->mhome->getProducts(array('id' => $idProduct), array('slugs' => 'slugs'), 'tm_product', TRUE);
+	  // $slugs = $slugs['slugs'];
+    $this->load->helper('form');
+    $this->load->library('form_validation');
+
+    $this->form_validation->set_rules('name', 'Name', 'required');
+    $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+    $this->form_validation->set_rules('comment', 'Comment', 'required');
+    $this->form_validation->set_rules('product-review-vote', 'Vote', 'required');
+
+    if ($this->form_validation->run() == TRUE) {
+       
+      $data = array(
+          'name'    =>  $this->input->post('name'),
+          'email'   =>  $this->input->post('email'),
+          'comment' =>  $this->input->post('comment'),
+          'stars'    =>  $this->input->post('product-review-vote')
+      );
+      $this->mhome->inputData('tm_reviews', $data);
+      $this->session->set_flashdata('success', 'Review Submitted');
+      redirect('home#review');
+    } else {
+      $this->session->set_flashdata('error', validation_errors());
+      redirect('home#review');
+    }
   }
 }

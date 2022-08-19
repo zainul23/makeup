@@ -39,6 +39,7 @@
               <li>
                 <!-- <li class="active"><a href="<?= site_url('admin/list-type');?>">Type</a></li> -->
                 <li class="active"><a href="<?= site_url('admin/list-catalog');?>">Catalog</a></li>
+                <li class="active"><a href="<?= site_url('admin/list-data-catalog');?>">Data Catalog</a></li>
               </li>
             </ul>
           </li>
@@ -51,8 +52,8 @@
             </a>
             <ul class="treeview-menu">
               <li>
-                <!-- <li class="active"><a href="<?= site_url('admin/list-type');?>">Type</a></li> -->
-                <li class="active"><a href="<?= site_url('admin/list-catalog');?>">Catalog</a></li>
+                <li class="active"><a href="<?= site_url('admin/list-transaction');?>">Transaction</a></li>
+                <li class="active"><a href="<?= site_url('admin/list-history-transaction');?>">History</a></li>
               </li>
             </ul>
           </li>

@@ -83,15 +83,14 @@
                             <label class="fs-12 mb-0">Note</label>
                             <label class="pt-0 fs-16 mb-0"><?= $detailOrder['note']?></label>
                             <hr>
-                            <?php if($this->session->has_userdata('error')): ?>
+                            <?php if(isset($error)): ?>
                               <div class="alert alert-mini alert-danger mb-30">
-                                <strong>Oh snap!</strong> <?= $this->session->userdata('error')?>
+                                <strong>Oh snap!</strong> <?php echo $error ?>
                               </div>
-                            <?php elseif($this->input->post('items') == NULL): ?>
-                              <?= validation_errors('<div class="alert alert-mini alert-danger mb-30">', '</div>');?>
-                            <?php endif;?>
-                            <?= form_open_multipart('home/detail-transaction/'.$detailOrder['order_number'], array('class' => 'm-0 sky-form')); ?>
-                            <!-- <input type="hidden" name="id" value="<?= $catalog['id']?>"> -->
+                            <?php endif; ?>
+                            <?= form_open_multipart('home/upload-payment/', array('class' => 'm-0 sky-form')); ?>
+                            <input type="hidden" name="id" value="<?= $detailOrder['order_number']?>">
+                            <input type="hidden" name="order_id" value="<?= $detailOrder['order_id']?>">
                             <!-- <form class="m-0 sky-form boxed" action="<?= site_url('home/detail-transaction');?>" method="post"> -->
                               <header>
                                   <h3>Upload Bukti Pembayaran</h3>
