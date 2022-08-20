@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2022 at 11:37 AM
+-- Generation Time: Aug 20, 2022 at 10:41 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.14
 
@@ -232,6 +232,28 @@ INSERT INTO `tm_reviews` (`id`, `name`, `email`, `stars`, `comment`, `status`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tm_super_admin`
+--
+
+CREATE TABLE `tm_super_admin` (
+  `id` int(11) NOT NULL,
+  `id_userlogin` int(11) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `phone` varchar(20) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tm_super_admin`
+--
+
+INSERT INTO `tm_super_admin` (`id`, `id_userlogin`, `first_name`, `last_name`, `phone`) VALUES
+(1, 5, 'First', 'Admin', '02198761234'),
+(2, 2, 'Super', 'Admin', '02112345678');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_login`
 --
 
@@ -305,6 +327,12 @@ ALTER TABLE `tm_reviews`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tm_super_admin`
+--
+ALTER TABLE `tm_super_admin`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user_login`
 --
 ALTER TABLE `user_login`
@@ -355,6 +383,12 @@ ALTER TABLE `tm_order`
 --
 ALTER TABLE `tm_reviews`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tm_super_admin`
+--
+ALTER TABLE `tm_super_admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `user_login`
