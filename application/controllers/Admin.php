@@ -12,11 +12,6 @@ class Admin extends CI_Controller {
         $this->load->model('Madmin', 'madmin');
     }
 
-    public function index()
-    {
-        echo 'cok';
-    }
-
     public function list_type(){
         if ($this->session->userdata('uType') == 1) {
             $data['sizes'] = $this->madmin->getProducts(array('deleted' => 0), NULL,'tm_size', FALSE);
