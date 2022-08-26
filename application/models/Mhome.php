@@ -439,17 +439,11 @@ class Mhome extends CI_Model{
     }
 
   public function getOrderList($id) {
-      // $this->db->select('a.order_id, a.order_number, a.type, a.price, a.order_date, a.status');
-      // $this->db->from('tm_order a');
-      // $this->db->join('tm_catalogs b', 'b.id = a.cat_id');
-      // $this->db->where('a.user_id', $id);
-      // $this->db->where('a.status = 1');
-      // $this->db->group_by('a.order_id');
-      // $this->db->order_by('order_date', 'DESC');
     $query = $this->db->query("
 			SELECT a.order_id, a.order_number, a.type, a.price, a.order_date, a.status 
       FROM tm_order a
-				WHERE status IN ('0','1','2')
+				WHERE status IN ('0','1')
+        AND a.user_id = $id
 			  GROUP BY a.order_id
         ORDER BY a.order_date DESC
 		");
@@ -460,7 +454,8 @@ class Mhome extends CI_Model{
       $query = $this->db->query("
         SELECT a.order_id, a.order_number, a.type, a.price, a.order_date, a.status 
         FROM tm_order a
-          WHERE status NOT IN ('0','1','2')
+          WHERE status NOT IN ('0','1')
+          AND user_id = '$id'
           GROUP BY a.order_id
           ORDER BY a.order_date DESC
 		  ");

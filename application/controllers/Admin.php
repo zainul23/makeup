@@ -600,7 +600,7 @@ class Admin extends CI_Controller {
 
     public function list_transaction(){
         if ($this->session->userdata('uType') == 1) {
-            $data['transactions'] = $this->madmin->getProducts(array('status !=' => '3', 'status !=' => '2'), NULL, 'tm_order', FALSE);
+            $data['transactions'] = $this->madmin->getOrderList();
 
             $this->load->view('include/admin/header');
             $this->load->view('include/admin/left-sidebar');
@@ -616,7 +616,7 @@ class Admin extends CI_Controller {
 
     public function list_history_transaction(){
         if ($this->session->userdata('uType') == 1) {
-            $data['transactions'] = $this->madmin->getProducts(array('status !=' => '0', 'status !=' => '1'), NULL, 'tm_order', FALSE);
+            $data['transactions'] = $this->madmin->getOrderHistory();
 
             $this->load->view('include/admin/header');
             $this->load->view('include/admin/left-sidebar');

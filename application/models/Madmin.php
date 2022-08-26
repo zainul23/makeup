@@ -124,6 +124,27 @@ class Madmin extends CI_Model {
         }
     }
 
+    public function getOrderList() {
+      $query = $this->db->query("
+        SELECT a.order_id, a.nama, a.alamat, a.note, a.picture, a.order_number, a.type, a.price, a.order_date, a.status 
+        FROM tm_order a
+          WHERE status IN ('0','1')
+          GROUP BY a.order_id
+          ORDER BY a.order_date DESC
+		  ");
+		  return $query->result_array();
+    }
+
+    public function getOrderHistory() {
+      $query = $this->db->query("
+        SELECT a.order_id, a.nama, a.alamat, a.note, a.picture, a.order_number, a.type, a.price, a.order_date, a.status 
+        FROM tm_order a
+          WHERE status NOT IN ('0','1')
+          GROUP BY a.order_id
+          ORDER BY a.order_date DESC
+		  ");
+		  return $query->result_array();
+    }
   public function allProducts($condition = NULL, $selection = NULL, $table, $singleRowResult =  FALSE){
     if ($condition != NULL) {
       foreach ($condition as $key => $value) {

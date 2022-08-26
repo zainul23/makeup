@@ -100,7 +100,7 @@
     </div>
     <div class="copyright">
         <div class="container text-center">
-            &copy; All Rights Reserved, <b>AGM - American Giant Mattress</b>
+            &copy; All Rights Reserved <b> - Salza Makeup Artist</b>
         </div>
     </div>
 </footer>

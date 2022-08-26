@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <!-- /.content-wrapper -->
 <footer class="main-footer">
-  <strong>Copyright &copy; AGM - American Giant Mattress.</strong> All rights reserved.
+  <strong>&copy All rights reserved - Salza Makeup Artist.</strong> 
 </footer>
 <!-- Add the sidebar's background. This div must be placed
      immediately after the control sidebar -->

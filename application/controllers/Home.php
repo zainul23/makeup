@@ -108,8 +108,9 @@ class Home extends CI_Controller{
   public function transactionPage(){
     if ($this->session->userdata('uType') == 4) {
       $idCustomer = $this->session->userdata('uId');
-
+      // var_dump($idCustomer);
       $data['orderList'] = $this->mhome->getOrderList($idCustomer);
+      // var_dump($data['orderList']);
       // print_r($data['orderList']);exit();
 
         // $brands['brands'] = $this->mhome->getProducts(array('id !=' => 0, 'deleted' => 0, 'status' => 1), NULL, 'tm_brands', FALSE);

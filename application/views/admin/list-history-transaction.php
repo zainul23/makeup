@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <div class="content-wrapper">
   <section class="content-header">
-      <h1>List</h1>
+      <h1>History</h1>
   </section>
   <section class="content">
     <div class="row">
@@ -20,7 +20,9 @@
                 <th width="20%">Nama</th>
                 <th width="10%">Order Date</th>
                 <th width="10%">Catalog</th>
+                <th width="20%">Alamat</th>
                 <th width="20%">Price</th>
+                <th width="10%">Note</th>
                 <th width="10%">Status</th>
               </thead>
               <tbody>
@@ -31,7 +33,9 @@
                     <td><?= $transaction['nama'];?></td>
                     <td><?= $transaction['order_date'];?></td>
                     <td><?= $transaction['type'];?></td>
+                    <td><?= $transaction['alamat'];?></td>
                     <td><?= number_format($transaction['price']);?></td>
+                    <td><?= $transaction['note'];?></td>
                     <td>
                     <?php
                         switch($transaction['status']) {

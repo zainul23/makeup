@@ -88,29 +88,31 @@
                                 <strong>Oh snap!</strong> <?php echo $error ?>
                               </div>
                             <?php endif; ?>
-                            <?= form_open_multipart('home/upload-payment/', array('class' => 'm-0 sky-form')); ?>
-                            <input type="hidden" name="id" value="<?= $detailOrder['order_number']?>">
-                            <input type="hidden" name="order_id" value="<?= $detailOrder['order_id']?>">
-                            <!-- <form class="m-0 sky-form boxed" action="<?= site_url('home/detail-transaction');?>" method="post"> -->
-                              <header>
-                                  <h3>Upload Bukti Pembayaran</h3>
-                              </header>
+                            <?php if ($detailOrder['status'] != '2'): ?>
+                              <?= form_open_multipart('home/upload-payment/', array('class' => 'm-0 sky-form')); ?>
+                              <input type="hidden" name="id" value="<?= $detailOrder['order_number']?>">
+                              <input type="hidden" name="order_id" value="<?= $detailOrder['order_id']?>">
+                              <!-- <form class="m-0 sky-form boxed" action="<?= site_url('home/detail-transaction');?>" method="post"> -->
+                                <header>
+                                    <h3>Upload Bukti Pembayaran</h3>
+                                </header>
 
-                              <fieldset class="m-0">
-                                  <label class="input mb-15">
-                                      <i class="ico-append fa fa-file"></i>
-                                      <input class="form-control" name="file" type="file" placeholder="Select date" autocomplete="off">
-                                  </label>
-                              </fieldset>
-                              <div class="row mb-20">
-                                  <div class="col-md-12">
-                                      <button type="submit" class="btn btn-oldblue btn-default">Upload</button>
-                                      <a href="<?= site_url('home/transactionPage');?>" class="btn btn-secondary btn-default">Cancel</a>
-                                      <!-- <button type="submit" class="btn btn-secondary btn-default">Cancel</button> -->
-                                  </div>
-                              </div>
+                                <fieldset class="m-0">
+                                    <label class="input mb-15">
+                                        <i class="ico-append fa fa-file"></i>
+                                        <input class="form-control" name="file" type="file" placeholder="Select date" autocomplete="off">
+                                    </label>
+                                </fieldset>
+                                <div class="row mb-20">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-oldblue btn-default">Upload</button>
+                                        <a href="<?= site_url('home/transactionPage');?>" class="btn btn-secondary btn-default">Cancel</a>
+                                        <!-- <button type="submit" class="btn btn-secondary btn-default">Cancel</button> -->
+                                    </div>
+                                </div>
 
-                            </form>
+                              </form>
+                            <?php endif;?>
                           </div>
 
                         </div>

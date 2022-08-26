@@ -4,7 +4,7 @@
 <html lang="en" id="home">
 
 <head>
-    <title>The Most Complete Mattress Shopping Center | American Giant Mattress</title>
+    <title>Salza Makeup Artist</title>
     <meta charset="utf-8" />
     <meta name="description" content="American Giant Mattress, AGM, a trusted online mattress shop sells comfortable mattressess and etc." />
     <meta name="Author" />
@@ -72,7 +72,7 @@
                             <div class="dropdown-menu dropdown-menu-right m-0 p-0">
                                 <a class="dropdown-item fs-14 text-muted uppercase mb-3" href="<?= site_url('home/transactionPage');?>">TRANSAKSI</a>
                                 <a class="dropdown-item fs-14 text-muted uppercase mb-3" href="<?= base_url('home/historyPage');?>">HISTORI</a>
-                                <a class="dropdown-item fs-14 text-muted uppercase mb-3" href="<?= base_url('home/shopCart');?>">CART</a>
+                                <!-- <a class="dropdown-item fs-14 text-muted uppercase mb-3" href="<?= base_url('home/shopCart');?>">CART</a> -->
                                 <a class="dropdown-item fs-14 text-muted uppercase mb-3" href="<?= site_url('home/profilePage');?>">PROFIL</a>
                                 <a class="dropdown-item fs-14 text-muted uppercase dropdown-custom-icon dropdown-myaccount-logout" href="<?= site_url('auth/logout');?>">
                                     <i class="fa fa-power-off"></i>
@@ -118,6 +118,12 @@
                                 <!-- HOME -->
                                 <a href="<?= base_url('home/catalog')?>">
                                     CATALOG
+                                </a>
+                            </li>
+                            <li>
+                                <!-- HOME -->
+                                <a href="<?= base_url('home/page-order')?>">
+                                    ORDER
                                 </a>
                             </li>
                             <!-- <li>

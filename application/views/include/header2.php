@@ -4,7 +4,7 @@
 <html lang="en" id="home">
 
 <head>
-	<title>The Most Complete Mattress Shopping Center | American Giant Mattress</title>
+	<title>Salza Makeup Artist</title>
 	<meta charset="utf-8" />
 	<meta name="description" content="American Giant Mattress, AGM, a trusted online mattress shop sells comfortable mattressess and etc." />
 	<meta name="Author" />
@@ -121,6 +121,12 @@
 										CATALOG
 									</a>
 								</li>
+								<li>
+                                <!-- HOME -->
+                                <a href="<?= base_url('home/page-order')?>">
+                                    ORDER
+                                </a>
+                            </li>
 								<!-- <li>
 									<a href="#">
 										LOCATION
